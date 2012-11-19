@@ -31,7 +31,7 @@ class User < ActiveRecord::Base
       mech = Mechanize.new {|m| m.user_agent_alias = "Mac Safari" }
       mech.get(access_token["info"]["image"].sub(/square/ , "large")) do |page|
         rand_name = SecureRandom.hex(16)
-        facebook_picture = AppSpecificStringIO.new("#{rand_name}.png","image/png",page.body)
+        facebook_picture = AppSpecificStringIO.new("#{rand_name}.jpeg","image/jpeg",page.body)
       end
       
       actual_user_object = User.new(:email => data.email, :password => Devise.friendly_token[6,12],:avatar => facebook_picture,:first_name => data.first_name,:last_name => data.last_name)      
