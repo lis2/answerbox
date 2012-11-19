@@ -1,6 +1,5 @@
 class QuestionsController < ApplicationController
-  def new
-  end
+  before_filter :authenticate_user!
 
   def create
     if @user.questions.create!(params[:question])
@@ -10,5 +9,9 @@ class QuestionsController < ApplicationController
       flash[:notice] "Something was wrong"
       render "new"
     end
+  end
+
+  def show
+    @question = current_user.questions(params[:id])
   end
 end
