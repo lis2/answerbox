@@ -22,7 +22,7 @@ class AnswersController < ApplicationController
   private
   def load_answer
     @answer = Answer.find(params[:id])
-    if current_user.id != @answer.question.user_id
+    if current_user.id != @answer.question.user_idgit 
       flash[:notice] = "You are not owner of a question"
       redirect_to root_path
     end

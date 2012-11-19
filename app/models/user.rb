@@ -11,6 +11,8 @@ class User < ActiveRecord::Base
 
   attr_accessible :avatar
   has_attached_file :avatar
+  has_many :questions
+  has_many :answers
 
   def full_name
     "#{self.first_name} #{self.last_name}"

@@ -74,6 +74,11 @@ img {
   border: 0;
   -ms-interpolation-mode: bicubic;
 }
+/* limit the img size to a predefined size by adding a height(it will be resizet automatically) */
+.media-object.small {
+  height: 64px;
+  width: 64px;
+}
 
 #map_canvas img,
 .google-maps img {

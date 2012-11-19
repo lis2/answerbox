@@ -1,1 +1,8 @@
-%p Hello
+.container-fluid{:style => "max-width: 900px; margin: 0 auto;"}
+  = render partial: "question", collection: @questions
+  .row-fluid
+    .span12
+      .row-fluid
+      .row-fluid
+        .well{:style => " margin: 0 auto 10px;"}
+          %button.btn.btn-large.btn-block{:type => "button"} Load more questions
