@@ -4,5 +4,8 @@
     .span12
       .row-fluid
       .row-fluid
-        .well{:style => " margin: 0 auto 10px;"}
-          %button.btn.btn-large.btn-block{:type => "button"} Load more questions
+        - if @questions.length > 0
+          .well{:style => " margin: 0 auto 10px;"}
+            %button.btn.btn-large.btn-block{:type => "button"} Load more questions
+        - else
+          %h1 No questions so far.
