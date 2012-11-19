@@ -1,6 +1,10 @@
 class QuestionsController < ApplicationController
   before_filter :authenticate_user!, except: "index"
 
+  def index
+    @questions = Question.all
+  end
+
   def create
     if @user.questions.create(params[:question])
       flash[:notice] = "Question was saved"

@@ -4,6 +4,5 @@
       %img.media-object.small{:src => @question.user.avatar.url}
     .media-body
       %h4.media-heading
-        = @question.title
         %a{:href => question_path(@question)}= @question.title
       %p= @question.body
