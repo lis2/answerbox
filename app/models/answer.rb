@@ -6,6 +6,11 @@ class Answer < ActiveRecord::Base
   validates :body, presence: true
   validate :question_answered
 
+  def mark_as_checked!
+    self.checked = true
+    self.save
+  end
+
   private
   def question_answered
     errors[:answered] << 'Question releated to this answer is already answered' if self.question.answered?
