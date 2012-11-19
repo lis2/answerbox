@@ -10,9 +10,11 @@ Answerbox::Application.routes.draw do
   end
 
   resources :questions, only: [:show, :index, :new, :create] do
-    resources :answers, only: [:new, :create] do
-      post :mark_as_checked, on: :member
-    end
+    resources :answers, only: [:new, :create]
+  end
+
+  resources :answers do
+    post :mark_as_checked, on: :member
   end
 
   root :to => "questions#index"

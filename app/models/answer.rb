@@ -6,8 +6,8 @@ class Answer < ActiveRecord::Base
   validates :body, presence: true
   validate :question_answered
 
-  def mark_as_checked!
-    self.checked = true
+  def mark_as_answered!
+    self.answered = true
     self.save
   end
 

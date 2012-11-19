@@ -1,0 +1,7 @@
+.control-group
+  = answer.body
+  = answer.user_id
+
+  - if @owner && !answer.question.answered?
+    = link_to "This is answer!", mark_as_checked_answer_path(answer), method: :post
+   

@@ -6,3 +6,14 @@
       %h4.media-heading
         %a{:href => question_path(@question)}= @question.title
       %p= @question.body
+- unless @question.answered?
+  = form_for :answer, url: question_answers_path(@question), html: { class: "form-horizontal" }do |f|
+    %fieldset
+      .control-group
+        = f.label "Answer: "
+      .control-group
+        = f.text_area :body
+      .control-group
+        = f.submit "Add", class: "btn"
+
+= render partial: "answer", collection: @question.answers

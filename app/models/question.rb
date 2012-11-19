@@ -10,4 +10,8 @@ class Question < ActiveRecord::Base
   def answered?
     self.answers.detect(&:answered?)
   end
+
+  def owner?(current_user)
+    self.user_id == current_user.id
+  end
 end

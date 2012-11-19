@@ -17,5 +17,6 @@ class QuestionsController < ApplicationController
 
   def show
     @question = current_user.questions.find(params[:id])
+    @owner = @question.owner?(current_user)
   end
 end
