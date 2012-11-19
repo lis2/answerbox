@@ -17,7 +17,7 @@ Devise.setup do |config|
 
   facebook_permission_scope_v = 'email, offline_access'
 
-  config.omniauth :facebook, ENV.fetch("FACEBOOK_API_ID","341245749272277"),ENV.fetch("FACEBOOK_API_SECRET","35e1f8ee6303a71186cc0e03c84f6a3b"),
+  config.omniauth :facebook, ENV.fetch("FACEBOOK_API_ID","426642154038891"),ENV.fetch("FACEBOOK_API_SECRET","296c7faef47fe24ed39f6a9ba4d3ff9c"),
   {
     :scope => facebook_permission_scope_v,:display => "popup",:client_options => {:ssl => {:ca_file => '/usr/lib/ssl/certs/ca-certificates.crt'}}
   }
