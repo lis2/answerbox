@@ -20,6 +20,8 @@ group :assets do
   gem 'uglifier', '>= 1.0.3'
 end
 
+gem "redcarpet","2.2.2"
+
 group :development do
   gem "debugger","1.1.3"
   #  gem "pry","0.9.9.6"

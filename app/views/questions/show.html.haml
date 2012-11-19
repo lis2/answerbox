@@ -5,4 +5,4 @@
     .media-body
       %h4.media-heading
         %a{:href => question_path(@question)}= @question.title
-      %p= @question.body
+      %p= @question.body.html_safe

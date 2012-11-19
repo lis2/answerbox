@@ -10,4 +10,14 @@ class Question < ActiveRecord::Base
   def answered?
     self.answers.detect(&:answered?)
   end
+
+  before_save :render_body
+
+  private
+  def render_body
+    renderer = Redcarpet::Render::HTML.new
+    extensions = {fenced_code_blocks: true}
+    redcarpet = Redcarpet::Markdown.new(renderer, extensions)
+    self.body = redcarpet.render(self.body)
+  end
 end
