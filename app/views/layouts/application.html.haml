@@ -1,0 +1,51 @@
+!!! 5
+%html
+  %head
+    %meta(charset="utf-8")
+    %title Index | AnswersBox
+    %meta(name="viewport" content="width=device-width, initial-scale=1.0")
+    %meta(name="description" content="")
+    %meta(name="author" content="")
+    = stylesheet_link_tag "application"
+    :css
+      body {
+        padding-top: 60px;
+        padding-bottom: 40px;
+      }
+      .sidebar-nav {
+        padding: 9px 0;
+      }
+    %meta(name="viewport" content="width=device-width, initial-scale=1.0")
+    
+    <!-- Fav and touch icons -->
+    %link(rel="shortcut icon" href="../assets/ico/favicon.ico")
+    %link(rel="apple-touch-icon-precomposed" sizes="144x144" href="/assets/ico/apple-touch-icon-144-precomposed.png")
+    %link(rel="apple-touch-icon-precomposed" sizes="114x114" href="/assets/ico/apple-touch-icon-114-precomposed.png")
+    %link(rel="apple-touch-icon-precomposed" sizes="72x72" href="/assets/ico/apple-touch-icon-72-precomposed.png")
+    %link(rel="apple-touch-icon-precomposed" href="/assets/ico/apple-touch-icon-57-precomposed.png")
+    = javascript_include_tag "application"
+    = csrf_meta_tags
+  %body
+    %div.navbar.navbar-inverse.navbar-fixed-top
+      %div.navbar-inner
+        %div.container-fluid{:style => "max-width: 900px; margin: 0 auto;"}
+          %a(class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse")
+            %span(class="icon-bar")
+            %span(class="icon-bar")
+            %span(class="icon-bar")
+          %a(class="brand" href="#") AnswersBox
+          %div.nav-collapse.collapse
+            %p.navbar-text.pull-right
+              Logged in as Johnny
+            %p.navbar-text.pull-right(style="display:none")
+              %a(href="#" class="navbar-link") Log out
+            %ul.nav
+              %li(class="active")
+                %a(href="#") Home
+              %li
+                %a(href="#new_question") Ask a question
+    %div.container-fluid(style="max-width: 900px; margin: 0 auto;")
+      = yield
+      %hr
+      %footer
+        %p © AnswerBox
