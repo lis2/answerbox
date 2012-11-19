@@ -1,0 +1,4 @@
+- if current_user
+  %a{:href => destroy_user_session_path}= "Logged in as #{current_user.full_name}"
+- else
+  %a{:href => user_omniauth_authorize_path(:facebook), :class => "facebook_btn"} Login
