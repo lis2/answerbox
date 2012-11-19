@@ -1,7 +1,12 @@
-.control-group
-  = answer.body
-  = answer.user_id
-
-  - if @owner && !answer.question.answered?
-    = link_to "This is answer!", mark_as_checked_answer_path(answer), method: :post
+%div.well.well-small
+  .media
+    .pull-left
+      %img.media-object.small{:src => answer.user.avatar.url}
+    .media-body
+      .control-group
+        = answer.body
+        %br
+        %br
+        - if @owner && !answer.question.answered?
+          = link_to "This is answer!", mark_as_checked_answer_path(answer), method: :post
    
