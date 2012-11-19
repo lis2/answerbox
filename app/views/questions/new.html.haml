@@ -1,0 +1,16 @@
+= form_for(@question) do |f|
+  %fieldset
+    %legend Ask question
+    %div.control-group{:class => @question.errors[:title].length > 0 ? "error" : ""}
+      %label Title
+      %div.controls
+        = f.text_field :title,:placeholder => "Question title ..."
+        - if @question.errors[:title].length > 0
+          %span.help-inline= @question.errors[:title].last
+    %div.control-group{:class => @question.errors[:body].length > 0 ? "error" : ""}
+      %label Body
+      %div.controls
+        = f.text_area :body, :placeholder => "Question body ...",:rows => 3
+        - if @question.errors[:body].length > 0
+          %span.help-inline= @question.errors[:body].last
+    %button(type="submit" class="btn") Submit

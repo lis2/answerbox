@@ -2,7 +2,7 @@ Answerbox::Application.routes.draw do
 
   devise_for :users,:skip => [:sessions,:confirmations,:passwords,:registrations],:controllers => {:omniauth_callbacks => "users/omniauth_callbacks",:sessions => "sessions"} do
     get '/logout' => 'sessions#destroy', :as => :destroy_user_session
-    get "/login"  => "sessions#login"  , :as => :login_user_session
+    get '/login' => 'sessions#new', :as => :new_user_session
   end
 
   devise_scope :user do

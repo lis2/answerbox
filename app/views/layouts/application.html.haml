@@ -42,9 +42,9 @@
                 %a{:href => user_omniauth_authorize_path(:facebook)} Login
             %ul.nav
               %li(class="active")
-                %a(href="#") Home
+                %a(href=root_path) Home
               %li
-                %a(href="#new_question") Ask a question
+                %a(href=new_question_path) Ask a question
     %div.container-fluid(style="max-width: 900px; margin: 0 auto;")
       = yield
       %hr

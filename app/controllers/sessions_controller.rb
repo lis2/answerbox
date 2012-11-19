@@ -1,4 +1,5 @@
 class SessionsController < Devise::SessionsController
-  def login
+  def new
+    render :login
   end
 end
