@@ -16,7 +16,9 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
 
     end
 
-    redirect_to root_path
+    where_to_return = env["rack.session"]["user_return_to"] || root_path
+
+    redirect_to where_to_return
   end
 
   def passthru

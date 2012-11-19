@@ -1,14 +1,19 @@
 class QuestionsController < ApplicationController
-  before_filter :authenticate_user!, except: "index"
+  before_filter :authenticate_user!, except: :index
 
   def index
     @questions = Question.all
   end
+  
+  def new
+    @question = current_user.questions.build
+  end
 
   def create
-    if @user.questions.create(params[:question])
+    @question = current_user.questions.build(params[:question])
+    if @question.save
       flash[:notice] = "Question was saved"
-      redirect_to root_path
+      redirect_to @question
     else
       flash[:notice] = "Something was wrong"
       render "new"

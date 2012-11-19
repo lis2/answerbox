@@ -11,6 +11,7 @@ class User < ActiveRecord::Base
 
   attr_accessible :avatar
   has_attached_file :avatar
+
   has_many :questions
   has_many :answers
 
