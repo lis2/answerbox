@@ -1,3 +1,6 @@
 .well.well-small
   %h4
-    %a{:href => question_path(question)}= question.title
+    %a{:href => question_path(question)}
+      - if question.answered?
+        %i.icon-ok
+      = question.title
