@@ -4,7 +4,7 @@
       %img.media-object.small{:src => answer.user.avatar.url}
     .media-body
       .control-group
-        = answer.body
+        = answer.body.html_safe
         %br
         %br
         - if @owner && !answer.question.answered?
