@@ -5,7 +5,12 @@ class AnswersController < ApplicationController
   def create
     @question = Question.find(params[:question_id])
     if @answer = @question.answers.create(params[:answer])
+
       @answer.update_attribute(:user_id, current_user.id)
+
+      rendered_content = render_to_string(:partial => "questions/answer",:layout => false,:locals => {:answer => @answer})
+      Notifier.instance.broadcast_message("/questions/#{@question.id}",{:fresh_answer => rendered_content})
+
       flash[:notice] = "Thank you for your answer"
     else
       flash[:notice] = "Please check if fields are correct"

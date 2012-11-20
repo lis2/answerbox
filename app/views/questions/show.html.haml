@@ -1,4 +1,4 @@
-.well.well-small
+.well.well-small{:"data-question" => @question.id}
   .media
     .pull-left
       %img.media-object.small{:src => @question.user.avatar.url}
@@ -15,5 +15,5 @@
         = f.text_area :body
       .control-group
         = f.submit "Add", class: "btn"
-
-= render partial: "answer", collection: @question.answers
+.all_answers
+  = render partial: "answer", collection: @question.answers

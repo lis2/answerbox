@@ -21,6 +21,8 @@ group :assets do
 end
 
 gem "redcarpet","2.2.2"
+gem "faye","0.8.2"
+gem "thin","1.3.1"
 
 group :development do
   gem "debugger","1.1.3"

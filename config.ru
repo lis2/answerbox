@@ -1,4 +1,7 @@
 # This file is used by Rack-based servers to start the application.
 
 require ::File.expand_path('../config/environment',  __FILE__)
-run Answerbox::Application
+
+Faye::WebSocket.load_adapter('thin')
+bayeux = Faye::RackAdapter.new(Answerbox::Application, :mount => '/faye')
+run bayeux
