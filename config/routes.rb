@@ -9,9 +9,12 @@ Answerbox::Application.routes.draw do
     get '/users/auth/:provider' => 'users/omniauth_callbacks#passthru'
   end
 
+
+
   resources :questions, only: [:show, :index, :new, :create] do
     resources :answers, only: [:new, :create]
     collection do
+      get  :load_data
       post :filter
     end
   end

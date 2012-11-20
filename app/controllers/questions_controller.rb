@@ -2,7 +2,12 @@ class QuestionsController < ApplicationController
   before_filter :authenticate_user!, except: [:index,:show]
 
   def index
-    @questions = Question.all
+    @questions = Question.paginate(:page => params[:page],:per_page => 10)
+  end
+
+  def load_data
+    @questions = Question.paginate(:page => params[:page],:per_page => 5)
+    render :partial => "questions/question",:layout => false,:collection => @questions
   end
   
   def new

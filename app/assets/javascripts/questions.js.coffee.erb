@@ -2,6 +2,10 @@
 # All this logic will automatically be available in application.js.
 # You can use CoffeeScript in this file: http://jashkenas.github.com/coffee-script/
 $ ->
+  $(".container-fluid").infinitescroll
+    navSelector: ".pagination"
+    nextSelector : ".next_page"
+
   $dq = $("div[data-question]")
   if $dq.length > 0
     faye = new Faye.Client("http://127.0.0.1:<%= ENV["RACK_PORT"] %>/faye")
