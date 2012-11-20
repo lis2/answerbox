@@ -7,4 +7,7 @@
       - if @answer && @answer.errors[:body].length > 0
         %span.help-inline= @answer.errors[:body].last
     .control-group
-      = f.submit "Add", class: "btn"
+      - if @owner
+        = f.submit "Add", class: "btn", confirm: "Are you sure you want to answer your own question?"
+      - else
+        = f.submit "Add", class: "btn"
