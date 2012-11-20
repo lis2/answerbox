@@ -3,9 +3,9 @@ class Answer < ActiveRecord::Base
   belongs_to :question
   belongs_to :user
   
-  validates :body, presence: true
+  validates :body, presence: true, length: { minimum: 1 }
   validate :question_answered
-
+ 
   def mark_as_answered!
     self.answered = true
     self.save

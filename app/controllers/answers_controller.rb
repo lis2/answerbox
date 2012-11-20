@@ -4,13 +4,14 @@ class AnswersController < ApplicationController
 
   def create
     @question = Question.find(params[:question_id])
-    if @answer = @question.answers.create(params[:answer])
+    @answer = @question.answers.build(params[:answer])
+    if @answer.save
+      @owner = current_user ? @question.owner?(current_user) : false
       @answer.update_attribute(:user_id, current_user.id)
       flash[:notice] = "Thank you for your answer"
     else
-      flash[:notice] = "Please check if fields are correct"
+      flash[:error] = "Please check if fields are correct"
     end
-    redirect_to question_path(@question)
   end
 
   def mark_as_checked
