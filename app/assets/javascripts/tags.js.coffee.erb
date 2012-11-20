@@ -1,0 +1,11 @@
+$ ->
+  $.getJSON '<%= Rails.application.routes.url_helpers.tags_path %>', (data) ->
+    availableTags = []
+    $.each data, (key,val) ->
+      availableTags.push(val.name)
+    $( "#tags" ).autocomplete
+      source: availableTags
+      close: (event,ui) ->
+        filter_route = "<%= Rails.application.routes.url_helpers.filter_question_path("z") %>"
+        filter_route = filter_route.replace("/z/","/#{$(this).val()}/")
+        $.ajax(filter_route)
