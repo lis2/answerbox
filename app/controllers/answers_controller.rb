@@ -7,6 +7,7 @@ class AnswersController < ApplicationController
     if @answer = @question.answers.create(params[:answer])
 
       @answer.update_attribute(:user_id, current_user.id)
+      @owner = current_user ? @question.owner?(current_user) : false
 
       rendered_content = render_to_string(:partial => "questions/answer",:layout => false,:locals => {:answer => @answer})
       Notifier.instance.broadcast_message("/questions/#{@question.id}",{:fresh_answer => rendered_content})
