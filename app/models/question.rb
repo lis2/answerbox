@@ -21,6 +21,14 @@ class Question < ActiveRecord::Base
     self.user_id == current_user.id
   end
 
+  def tags?
+    self.tags.present?
+  end
+
+  def tags_names
+    tags.collect(&:name).join(", ")
+  end
+
   before_save :render_body
 
   before_create :create_tags

@@ -4,3 +4,8 @@
       - if question.answered?
         %i.icon-ok
       = question.title
+    - if question.tags?
+      %p
+        %strong Tags:
+        = question.tags_names
+
