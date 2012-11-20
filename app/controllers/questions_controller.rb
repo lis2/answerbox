@@ -26,6 +26,6 @@ class QuestionsController < ApplicationController
   end
 
   def filter
-    @questions = Question.with_tag(params[:id])
+    @questions = Question.with_tag(params[:tag_name])
   end
 end

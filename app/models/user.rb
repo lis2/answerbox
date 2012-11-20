@@ -19,6 +19,11 @@ class User < ActiveRecord::Base
     "#{self.first_name} #{self.last_name}"
   end
 
+  def change_points!(amount)
+    self.points += amount
+    self.save
+  end
+
   def can_ask_question?
     self.points >= Question::COST
   end

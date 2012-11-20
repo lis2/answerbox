@@ -6,22 +6,24 @@ class Answer < ActiveRecord::Base
   
   validates :body, presence: true, length: { minimum: 1 }
   validate :question_answered
-  validate :only_one_answer_per_user_per_question
+  validate :only_one_answer_per_user_per_question,:on => :create
 
   before_save :render_body
   after_create :give_points_to_user
  
   BONUS = 1
+  CORRECT_ANSWER_BONUS = 5
 
   def mark_as_answered!
     self.answered = true
     self.save
+
+    self.user.change_points!(CORRECT_ANSWER_BONUS)
   end
 
   private
   def give_points_to_user
-    self.user.points += BONUS
-    self.user.save
+    self.user.change_points!(BONUS)
   end
 
   def render_body

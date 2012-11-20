@@ -11,7 +11,7 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
 
     if user.persisted?
 
-      flash[:notice] = I18n.t("devise.omniauth_callbacks.success")
+      flash[:notice] = "Thanks for logging in!"
       sign_in user, :event => :authentication
 
     end

@@ -43,7 +43,7 @@
               %p.navbar-text.pull-right
                 %a.navbar-text.pull_right{:href => destroy_user_session_path}= "Logged in as #{current_user.full_name}"
             - else
-              %a{:href => user_omniauth_authorize_path(:facebook)} Login
+              %a{:href => user_omniauth_authorize_path(:facebook),:class => "navbar-text pull-right"} Login
           %ul.nav
             %li(class="active")
               %a(href=root_path) Home

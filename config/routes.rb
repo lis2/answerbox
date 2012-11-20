@@ -11,8 +11,8 @@ Answerbox::Application.routes.draw do
 
   resources :questions, only: [:show, :index, :new, :create] do
     resources :answers, only: [:new, :create]
-    member do
-      get :filter
+    collection do
+      post :filter
     end
   end
 

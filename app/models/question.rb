@@ -27,7 +27,14 @@ class Question < ActiveRecord::Base
 
   after_create :remove_points
 
-  scope :with_tag, lambda { |tag_name| joins(:tags).where("tags.name = ?", tag_name) }
+#  scope :with_tag, lambda { |tag_name| includes(:tags).where("tags.name LIKE ?", "#{tag_name}%") }
+  def self.with_tag(tag_name)
+    if tag_name.present?
+      joins(:tags).where("tags.name LIKE ?", "#{tag_name}%")
+    else
+      Question.scoped
+    end
+  end
 
   private
   def user_can_ask_question
@@ -35,8 +42,7 @@ class Question < ActiveRecord::Base
   end
 
   def remove_points
-    self.user.points -= COST
-    self.user.save
+    self.user.change_points!(-COST)
   end
 
   def render_body
