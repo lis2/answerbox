@@ -6,7 +6,7 @@ class User < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :validatable,:omniauthable
 
   # Setup accessible (or protected) attributes for your model
-  attr_accessible :email, :password, :password_confirmation, :remember_me,:first_name,:last_name
+  attr_accessible :email, :password, :password_confirmation, :remember_me,:first_name,:last_name, :points
   # attr_accessible :title, :body
 
   attr_accessible :avatar
@@ -23,7 +23,6 @@ class User < ActiveRecord::Base
     new_user_was_created = false
     actual_user_object   = nil
 
-
     data = access_token.extra.raw_info
     if user = User.where(:email => data.email).first
       actual_user_object = user
@@ -35,15 +34,22 @@ class User < ActiveRecord::Base
       mech.get(access_token["info"]["image"].sub(/square/ , "large")) do |page|
         rand_name = SecureRandom.hex(16)
         facebook_picture = AppSpecificStringIO.new("#{rand_name}.jpeg","image/jpeg",page.body)
+
       end
       
       actual_user_object = User.new(:email => data.email, :password => Devise.friendly_token[6,12],:avatar => facebook_picture,:first_name => data.first_name,:last_name => data.last_name)      
       actual_user_object.save
 
+      actual_user_object.set_points
     end
 
     actual_user_object
 
+  end
+
+  def set_points
+    self.points = 10
+    self.save
   end
 
 end
