@@ -2,6 +2,7 @@
   $("#answer-form").hide();
   $("#answers").html("<%=j render partial: 'questions/answer', collection: @question.answers %>");
 <% else %>
-
-  $("#answer-form").html("<%=j render partial: 'questions/answer_form' %>");
+  $answer_parent = $("#answer_body").parent();
+  $answer_parent.addClass("error");
+  $answer_parent.append($("<br/><span class='help-inline'><%= @answer.errors[:answered].last %></span>"));
 <% end %>
