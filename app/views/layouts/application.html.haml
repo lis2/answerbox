@@ -37,7 +37,9 @@
           %a(class="brand" href=root_path) AnswersBox
           %div.nav-collapse.collapse
             - if current_user
-              %p.navbar-text.pull-right= "points: #{current_user.points}"
+              %div.navbar-text.pull-right 
+                %span= "&nbsp points".html_safe
+                %span#points_container= current_user.points
               %p.navbar-text.pull-right
                 %a.navbar-text.pull_right{:href => destroy_user_session_path}= "Logged in as #{current_user.full_name}"
             - else

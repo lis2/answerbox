@@ -19,6 +19,10 @@ class User < ActiveRecord::Base
     "#{self.first_name} #{self.last_name}"
   end
 
+  def can_ask_question?
+    self.points >= Question::COST
+  end
+
   def self.find_for_facebook_oauth(access_token, signed_in_resource=nil)
     new_user_was_created = false
     actual_user_object   = nil
@@ -40,16 +44,10 @@ class User < ActiveRecord::Base
       actual_user_object = User.new(:email => data.email, :password => Devise.friendly_token[6,12],:avatar => facebook_picture,:first_name => data.first_name,:last_name => data.last_name)      
       actual_user_object.save
 
-      actual_user_object.set_points
     end
 
     actual_user_object
 
-  end
-
-  def set_points
-    self.points = 10
-    self.save
   end
 
 end

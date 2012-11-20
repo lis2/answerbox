@@ -15,6 +15,10 @@ class AnswersController < ApplicationController
 
       flash[:notice] = "Thank you for your answer"
     end
+
+    respond_to do |format|
+      format.js
+    end
   end
 
   def mark_as_checked

@@ -1,6 +1,12 @@
 <% if @answer.valid? %>
+
   $("#answer-form").hide();
   $("#answers").html("<%=j render partial: 'questions/answer', collection: @question.answers %>");
+
+  $pc = $("#points_container");
+  var value = parseInt($pc.html());
+
+  $pc.html(value+1);
 <% else %>
   $answer_parent = $("#answer_body").parent();
   $answer_parent.addClass("error");
