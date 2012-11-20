@@ -1,0 +1,12 @@
+# Place all the behaviors and hooks related to the matching controller here.
+# All this logic will automatically be available in application.js.
+# You can use CoffeeScript in this file: http://jashkenas.github.com/coffee-script/
+$ ->
+  $dq = $("div[data-question]")
+  if $dq.length > 0
+    faye = new Faye.Client("http://127.0.0.1:<%= ENV["RACK_PORT"] %>/faye")
+    question_id = $dq.attr("data-question")
+
+    subscription = faye.subscribe "/questions/#{question_id}", (message) ->
+      $all_answers  = $(".all_answers")
+      $all_answers.append($(message.fresh_answer)) if message.fresh_answer?
