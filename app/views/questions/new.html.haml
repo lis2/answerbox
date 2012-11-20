@@ -13,4 +13,8 @@
         = f.text_area :body, :placeholder => "Question body ...",:rows => 3
         - if @question.errors[:body].length > 0
           %span.help-inline= @question.errors[:body].last
+    %div.control-group
+      %label Tags
+      %div.controls
+        = f.text_field :tags_list, value: ""
     %button(type="submit" class="btn") Submit

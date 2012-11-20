@@ -3,7 +3,7 @@
     .control-group
       = f.label "Answer: "
     .control-group{:class => (@answer && @answer.errors[:body].length > 0) ? "error" : ""}
-      = f.text_area :body
+      = f.text_area :body, :rows => 3
       - if @answer && @answer.errors[:body].length > 0
         %span.help-inline= @answer.errors[:body].last
     .control-group
