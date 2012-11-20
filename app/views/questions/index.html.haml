@@ -1,5 +1,9 @@
 .container-fluid{:style => "max-width: 900px; margin: 0 auto;"}
-  = render partial: "question", collection: @questions
+  .ui-widget
+    = label_tag "tags"
+    = text_field_tag "tags"
+  #questions 
+    = render partial: "question", collection: @questions
   .row-fluid
     .span12
       .row-fluid

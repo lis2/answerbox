@@ -24,4 +24,8 @@ class QuestionsController < ApplicationController
     @question = Question.find(params[:id])
     @owner = current_user ? @question.owner?(current_user) : false
   end
+
+  def filter
+    @questions = Question.with_tag(params[:id])
+  end
 end

@@ -21,6 +21,8 @@ class Question < ActiveRecord::Base
 
   before_create :create_tags
 
+  scope :with_tag, lambda { |tag_name| joins(:tags).where("tags.name = ?", tag_name) }
+
   private
   def render_body
     renderer = Redcarpet::Render::HTML.new
