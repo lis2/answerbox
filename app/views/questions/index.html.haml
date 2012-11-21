@@ -8,7 +8,5 @@
     .span12
       .row-fluid
       .row-fluid
-        - if @questions.length > 0
-          .well{:style => " margin: 0 auto 10px;"}
-            %button.btn.btn-large.btn-block{:type => "button"} Load more questions
-  = will_paginate @questions
+  %div{:style => "display:none"}
+    = will_paginate @questions
