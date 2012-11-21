@@ -19,7 +19,10 @@ Answerbox::Application.routes.draw do
   end
 
   resources :answers do
-    post :mark_as_checked, on: :member
+    member do
+      post :mark_as_checked
+      post :create_comment
+    end
   end
 
   resources :tags, only: [:index]

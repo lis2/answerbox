@@ -21,6 +21,18 @@ class AnswersController < ApplicationController
     end
   end
 
+  def create_comment
+    @answer = Answer.find(params[:id])
+   
+    @comment = @answer.comments.build(params[:comment])
+    @comment.user_id = current_user.id
+    @comment.save
+
+    respond_to do |format|
+      format.js
+    end
+  end
+
   def mark_as_checked
     @answer.mark_as_answered!
     flash[:notice] = "Answer was checked"
