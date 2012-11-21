@@ -40,7 +40,7 @@ class Question < ActiveRecord::Base
     if search.present?
       #joins(:tags).where("tags.name LIKE ? OR title LIKE ?", "#{search}%", "%#{search}%").uniq
       joins("LEFT JOIN 'questions_tags' on questions.id = questions_tags.question_id LEFT JOIN 'tags' on tags.id = questions_tags.tag_id")
-        .where("tags.name LIKE ? or TITLE like ?","#{search}%","#{search}%").uniq
+        .where("tags.name LIKE ? or TITLE like ?","%#{search}%","%#{search}%").uniq
     else
       Question.scoped
     end
