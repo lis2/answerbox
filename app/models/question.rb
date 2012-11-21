@@ -38,7 +38,9 @@ class Question < ActiveRecord::Base
 #  scope :with_tag, lambda { |tag_name| includes(:tags).where("tags.name LIKE ?", "#{tag_name}%") }
   def self.with_tag_or_name(search)
     if search.present?
-      joins(:tags).where("tags.name LIKE ? OR title LIKE ?", "#{search}%", "%#{search}%").uniq
+      #joins(:tags).where("tags.name LIKE ? OR title LIKE ?", "#{search}%", "%#{search}%").uniq
+      joins("LEFT JOIN 'questions_tags' on questions.id = questions_tags.question_id LEFT JOIN 'tags' on tags.id = questions_tags.tag_id")
+        .where("tags.name LIKE ? or TITLE like ?","#{search}%","#{search}%").uniq
     else
       Question.scoped
     end
