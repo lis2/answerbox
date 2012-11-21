@@ -6,9 +6,10 @@
       %h4.media-heading
         %a{:href => question_path(@question)}= @question.title
       %p= @question.body.html_safe
+%h4 Answers
+%ul#answers.all_answers.nav.nav-list
+  = render partial: "answer", collection: @question.answers
+
 - unless @question.answered?
   #answer-form
     = render partial: "answer_form"
-#answers.all_answers
-
-  = render partial: "answer", collection: @question.answers
