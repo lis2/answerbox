@@ -36,9 +36,9 @@ class Question < ActiveRecord::Base
   after_create :remove_points
 
 #  scope :with_tag, lambda { |tag_name| includes(:tags).where("tags.name LIKE ?", "#{tag_name}%") }
-  def self.with_tag(tag_name)
-    if tag_name.present?
-      joins(:tags).where("tags.name LIKE ?", "#{tag_name}%")
+  def self.with_tag_or_name(search)
+    if search.present?
+      joins(:tags).where("tags.name LIKE ? OR title LIKE ?", "#{search}%", "%#{search}%").uniq
     else
       Question.scoped
     end
@@ -61,11 +61,13 @@ class Question < ActiveRecord::Base
   end
 
   def create_tags
-    tags_names = self.tags_list.split(",")
-    tags_names.each do |tag_name|
-      tag_name = tag_name.strip
-      tag = Tag.find_or_create_by_name(tag_name)
-      self.tags << tag
+    if self.tags_list.present?
+      tags_names = self.tags_list.split(",")
+      tags_names.each do |tag_name|
+        tag_name = tag_name.strip
+        tag = Tag.find_or_create_by_name(tag_name)
+        self.tags << tag
+      end
     end
   end
 end

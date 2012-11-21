@@ -1,14 +1,15 @@
 $ ->
   $tags = $("#tags")
   if $tags.length > 0
-    
-    $tags.change (e) ->
-      tag_value = $tags.val()
+
+    $tags.observe_field 0.1, () ->
+      search_value = $tags.val()
       filter_route = "<%= Rails.application.routes.url_helpers.filter_questions_path %>"
       $.ajax
         url: filter_route
         type: "POST"
         data:
-          tag_name: tag_value
+          search: search_value
       .error ->
         alert "Error occured"
+
