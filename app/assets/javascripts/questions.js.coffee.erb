@@ -2,7 +2,7 @@
 # All this logic will automatically be available in application.js.
 # You can use CoffeeScript in this file: http://jashkenas.github.com/coffee-script/
 $ ->
-  
+  faye = new Faye.Client("http://127.0.0.1:<%= ENV["RACK_PORT"] %>/faye")
   if $(".pagination").length
     $(window).scroll ->
       url = $('.pagination .next_page').attr('href')
@@ -11,9 +11,12 @@ $ ->
         $.getScript(url)
     $(window).scroll()
 
+  if ($(".container-fluid.index").size() > 0)
+    question_subscription = faye.subscribe "/questions", (message) ->
+      alert(message.title)
+
   $dq = $("div[data-question]")
   if $dq.length > 0
-    faye = new Faye.Client("http://127.0.0.1:<%= ENV["RACK_PORT"] %>/faye")
     question_id = $dq.attr("data-question")
 
     subscription = faye.subscribe "/questions/#{question_id}", (message) ->

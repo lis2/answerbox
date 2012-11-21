@@ -12,6 +12,7 @@ class QuestionsController < ApplicationController
   def create
     @question = current_user.questions.build(params[:question])
     if @question.save
+      Notifier.instance.broadcast_message("/questions",{:title => @question.title })
       flash[:info] = "Question was saved"
       redirect_to @question
     else
