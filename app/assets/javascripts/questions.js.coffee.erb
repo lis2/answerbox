@@ -38,5 +38,9 @@ $ ->
 
     subscription = faye.subscribe "/questions/#{question_id}", (message) ->
       $all_answers  = $(".all_answers")
-      console.log message.fresh_answer
       $all_answers.append($(message.fresh_answer)) if message.fresh_answer?
+
+    comment_subscription = faye.subscribe "/questions/#{question_id}/comments",(message) ->
+      if not $("*[data-id=#{message.comment_id}]").length
+        $("#answer_list").append(message.rendered_comment)
+

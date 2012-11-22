@@ -26,7 +26,10 @@ class AnswersController < ApplicationController
    
     @comment = @answer.comments.build(params[:comment])
     @comment.user_id = current_user.id
-    @comment.save
+    if @comment.save
+      rendered_content = render_to_string(:partial => "answers/comment",:layout => false,:locals => {:comment => @comment})
+      Notifier.instance.broadcast_message("/questions/#{@answer.question.id}/comments",{:rendered_comment => rendered_content,:comment_id => @comment.id})
+    end
 
     respond_to do |format|
       format.js
