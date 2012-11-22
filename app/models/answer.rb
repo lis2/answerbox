@@ -4,7 +4,7 @@ class Answer < ActiveRecord::Base
   belongs_to :question
   belongs_to :user
   
-  validates :body, presence: true, length: { minimum: 1 }
+  validates :body, presence: true 
   validate :question_answered
   validate :only_one_answer_per_user_per_question,:on => :create
 

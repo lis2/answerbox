@@ -6,7 +6,7 @@ class AnswersController < ApplicationController
     @question = Question.find(params[:question_id])
     @answer = @question.answers.build(params[:answer])
     @answer.user = current_user
-
+    
     if @answer.save
       @owner = current_user ? @question.owner?(current_user) : false
 
