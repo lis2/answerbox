@@ -1,9 +1,8 @@
 <% if @comment.valid? %>
   $("#comment-form .control-group").removeClass("error");
   
-   $("#comment_comment").val("");
-  //$("#-form").hide();
-  //$("#comment").html("<%#j render partial: 'questions/comments', collection: @answers %>");
+  $("#comment_body").val("");
+  $("#answer_list").html("<%= j render partial: "answers/comment", collection: @answer.comments %>");
 
 <% else %>
   $comment_parent = $("#comment_body").parent();

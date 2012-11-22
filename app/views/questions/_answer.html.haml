@@ -13,8 +13,9 @@
           %i.icon-ok
         - if current_user
           = render partial: "questions/comment_form", locals: { answer: answer }
-    - if answer.comments.present?
-      %h5 Comments
-      %ul.nav.nav-list
-      = render partial: "answers/comment", collection: answer.comments
+%h5 Comments
+#answer_comments
+  %ul.nav.nav-list#answer_list
+  - if answer.comments.present?
+    = render partial: "answers/comment", collection: answer.comments
 %li.divider   
