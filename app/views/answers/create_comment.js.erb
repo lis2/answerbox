@@ -1,0 +1,12 @@
+<% if @comment.valid? %>
+  $("#comment-form .control-group").removeClass("error");
+  
+   $("#comment_comment").val("");
+  //$("#-form").hide();
+  //$("#comment").html("<%#j render partial: 'questions/comments', collection: @answers %>");
+
+<% else %>
+  $("#comment-form .control-group").addClass("error").append($("<br/><span class='help-inline'><%= @comment.errors[:comment].last %></span>"));
+  //$answer_parent = $("#answer_body").parent();
+  //$answer_parent.addClass("error");
+<% end %>

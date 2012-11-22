@@ -11,4 +11,10 @@
           = link_to "This is answer!", mark_as_checked_answer_path(answer), method: :post
         - if answer.answered?
           %i.icon-ok
+        - if current_user
+          = render partial: "comment_form", locals: { answer: answer }
+    - if answer.comments.present?
+      %h5 Comments
+      %ul.nav.nav-list
+      = render partial: "answers/comment", collection: answer.comments
 %li.divider   

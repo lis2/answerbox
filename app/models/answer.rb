@@ -10,6 +10,8 @@ class Answer < ActiveRecord::Base
 
   before_save :render_body
   after_create :give_points_to_user
+
+  acts_as_commentable
  
   BONUS = 1
   CORRECT_ANSWER_BONUS = 5
