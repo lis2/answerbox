@@ -24,7 +24,7 @@
     %link(rel="apple-touch-icon-precomposed" sizes="72x72" href="/assets/ico/apple-touch-icon-72-precomposed.png")
     %link(rel="apple-touch-icon-precomposed" href="/assets/ico/apple-touch-icon-57-precomposed.png")
     = javascript_include_tag "application"
-    = javascript_include_tag "/faye.js"
+    = javascript_include_tag Notifier.instance.faye_js_link
     = csrf_meta_tags
   %body#body_id
     %div.navbar.navbar-inverse.navbar-fixed-top

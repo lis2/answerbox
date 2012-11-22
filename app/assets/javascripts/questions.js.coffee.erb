@@ -2,7 +2,7 @@
 # All this logic will automatically be available in application.js.
 # You can use CoffeeScript in this file: http://jashkenas.github.com/coffee-script/
 $ ->
-  faye = new Faye.Client("http://127.0.0.1:<%= ENV["RACK_PORT"] %>/faye")
+  faye = new Faye.Client("http://127.0.0.1:<%= ENV["FAYEPORT"] %>/faye")
   filtering_enabled = true
 
   if $(".pagination").length
@@ -38,4 +38,5 @@ $ ->
 
     subscription = faye.subscribe "/questions/#{question_id}", (message) ->
       $all_answers  = $(".all_answers")
+      console.log message.fresh_answer
       $all_answers.append($(message.fresh_answer)) if message.fresh_answer?

@@ -1,9 +1,10 @@
 class Question < ActiveRecord::Base
+
   attr_accessor   :tags_list
   attr_accessible :body, :title, :user_id, :tags_list,:rendered_body
   
   belongs_to :user
-  has_many :answers
+  has_many :answers,:dependent => :destroy
   has_and_belongs_to_many :tags
 
   validates :title, presence: true, length: { in: 10..150 }

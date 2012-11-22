@@ -2,6 +2,4 @@
 
 require ::File.expand_path('../config/environment',  __FILE__)
 
-Faye::WebSocket.load_adapter('thin')
-bayeux = Faye::RackAdapter.new(Answerbox::Application, :mount => '/faye')
-run bayeux
+run Answerbox::Application

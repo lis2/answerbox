@@ -12,7 +12,7 @@
         - if answer.answered?
           %i.icon-ok
         - if current_user
-          = render partial: "comment_form", locals: { answer: answer }
+          = render partial: "questions/comment_form", locals: { answer: answer }
     - if answer.comments.present?
       %h5 Comments
       %ul.nav.nav-list

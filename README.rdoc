@@ -1,1 +1,1 @@
-RACK_PORT=3000 thin start --threaded
+FAYEPORT=9292 rails s

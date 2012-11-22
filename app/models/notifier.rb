@@ -2,7 +2,7 @@ class Notifier
   include Singleton
 
   def heroku_faye_app
-    "http://127.0.0.1:#{ENV["RACK_PORT"]}/faye"
+    "http://127.0.0.1:#{ENV["FAYEPORT"]}/faye"
   end
 
   def faye_post_link
