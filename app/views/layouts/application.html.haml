@@ -37,11 +37,15 @@
           %a(class="brand" href=root_path) AnswersBox
           %div.nav-collapse.collapse
             - if current_user
+              %p.navbar-text.pull-right
+                %span= " &nbsp;|&nbsp;".html_safe
+                %a.navbar-text.pull_right{:href => destroy_user_session_path}= "Log out"
               %div.navbar-text.pull-right 
-                %span= "&nbsp points".html_safe
+                %span= " &nbsp; points".html_safe
                 %span#points_container= current_user.points
               %p.navbar-text.pull-right
-                %a.navbar-text.pull_right{:href => destroy_user_session_path}= "Logged in as #{current_user.full_name}"
+                %span= "<i><b>Logged in as #{current_user.full_name}</b></i>".html_safe
+             
             - else
               %a{:href => user_omniauth_authorize_path(:facebook),:class => "navbar-text pull-right"} Login
           %ul.nav
