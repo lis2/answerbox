@@ -16,7 +16,6 @@ class QuestionsController < ApplicationController
       flash[:info] = "Question was saved"
       redirect_to @question
     else
-      flash[:error] = "Something was wrong"
       render "new"
     end
   end
