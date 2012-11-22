@@ -1,5 +1,5 @@
 class Answer < ActiveRecord::Base
-  attr_accessible :answered, :body, :question_id, :user_id
+  attr_accessible :answered, :body, :question_id, :user_id,  :rendered_body
 
   belongs_to :question
   belongs_to :user
@@ -32,7 +32,7 @@ class Answer < ActiveRecord::Base
     renderer = Redcarpet::Render::HTML.new
     extensions = {fenced_code_blocks: true}
     redcarpet = Redcarpet::Markdown.new(renderer, extensions)
-    self.body = redcarpet.render(self.body)
+    self.rendered_body = redcarpet.render(self.body)
   end
 
   def only_one_answer_per_user_per_question
