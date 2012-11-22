@@ -5,7 +5,7 @@
       = f.label "Your answer: "
     .control-group{:class => (@answer && @answer.errors[:body].length > 0) ? "error" : ""}
       = f.text_area :body, :rows => 3,:style => "width:900px"
-      %span.help-inline 
+      %span.help-inline.answer-errors
     .control-group.pull-right
       - if @owner
         = f.submit "Answer now", class: "btn", confirm: "Are you sure you want to answer your own question?",:class => "btn btn-primary"

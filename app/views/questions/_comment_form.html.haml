@@ -1,4 +1,6 @@
 = form_for :comment, url: create_comment_answer_path(answer), remote: true, html: {id: "comment-form"} do |f|
   .control-group
-    = f.text_field :comment, placeholder: "Comment" 
-  = f.submit "add"
+    = f.text_field :comment, placeholder: "Comment",:id => :comment_body
+    %span.help-block#comment_errors
+  .control-group
+    = f.submit "add"

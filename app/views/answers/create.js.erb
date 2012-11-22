@@ -10,7 +10,7 @@
 <% else %>
   $answer_parent = $("#answer_body").parent();
   $answer_parent.addClass("error");
-  $error_field = $(".help-inline")
+  $error_field = $(".help-inline.answer-errors")
   <% if @answer  &&  @answer.errors[:answered].length > 0 %>
     $error_field.html($("<span class='help-inline'><%=  @answer.errors[:answered].last %></span>"));
   <% elsif @answer  &&  @answer.errors[:body].length > 0 %>
