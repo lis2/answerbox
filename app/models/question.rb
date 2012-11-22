@@ -1,6 +1,6 @@
 class Question < ActiveRecord::Base
   attr_accessor   :tags_list
-  attr_accessible :body, :title, :user_id, :tags_list
+  attr_accessible :body, :title, :user_id, :tags_list,:rendered_body
   
   belongs_to :user
   has_many :answers
@@ -59,7 +59,7 @@ class Question < ActiveRecord::Base
     renderer = Redcarpet::Render::HTML.new
     extensions = {fenced_code_blocks: true}
     redcarpet = Redcarpet::Markdown.new(renderer, extensions)
-    self.body = redcarpet.render(self.body)
+    self.rendered_body = redcarpet.render(self.body)
   end
 
   def create_tags

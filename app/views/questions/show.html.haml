@@ -5,7 +5,7 @@
     .media-body
       %h4.media-heading
         %a{:href => question_path(@question)}= @question.title
-      %p= @question.body.html_safe
+      %p= @question.rendered_body.html_safe
 - if @answers.present?
   %h4 Answers
 %ul#answers.all_answers.nav.nav-list
