@@ -30,7 +30,14 @@ $ ->
 
   if ($(".container-fluid.index").size() > 0)
     question_subscription = faye.subscribe "/questions", (message) ->
-      alert(message.title)
+      $nav = $("ul.nav")
+      if not $nav.find("#nq_reload").length
+        element = """
+        <li>
+          <a href="<%= Rails.application.routes.url_helpers.root_path %>"><p class="text-info">New questions</p></a>
+        </li>
+        """
+        $nav.append($(element))
 
   $dq = $("div[data-question]")
   if $dq.length > 0
