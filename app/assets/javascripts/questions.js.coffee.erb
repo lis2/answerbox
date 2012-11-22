@@ -3,12 +3,14 @@
 # You can use CoffeeScript in this file: http://jashkenas.github.com/coffee-script/
 $ ->
   faye = new Faye.Client("http://127.0.0.1:<%= ENV["RACK_PORT"] %>/faye")
+  filtering_enabled = true
+
   if $(".pagination").length
     $tags = $("#tags")
     if $tags.length > 0
       $tags.observe_field 0.1, () ->
         search_value = $tags.val()
-        filtering_enabled = not $.isEmptyObject(search_value)
+        filtering_enabled = $.isEmptyObject(search_value)
         filter_route = "<%= Rails.application.routes.url_helpers.filter_questions_path %>"
         $.ajax
           url: filter_route
@@ -20,10 +22,10 @@ $ ->
 
     $(window).scroll ->
       if filtering_enabled
-      url = $('.pagination .next_page').attr('href')
-      if url && $(window).scrollTop() > $(document).height() - $(window).height() - 50
-        $('.pagination').text("Fetching more products...")
-        $.getScript(url)
+        url = $('.pagination .next_page').attr('href')
+        if url && $(window).scrollTop() > $(document).height() - $(window).height() - 50
+          $('.pagination').text("Fetching more products...")
+          $.getScript(url)
     $(window).scroll()
 
   if ($(".container-fluid.index").size() > 0)
