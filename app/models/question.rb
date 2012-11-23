@@ -2,7 +2,7 @@ class Question < ActiveRecord::Base
 
   attr_accessor   :tags_list
   attr_accessible :body, :title, :user_id, :tags_list,:rendered_body
-  
+
   belongs_to :user
   has_many :answers,:dependent => :destroy
   has_and_belongs_to_many :tags
@@ -11,6 +11,11 @@ class Question < ActiveRecord::Base
   validates :body, presence: true, length: { minimum: 1 }
 
   validate :user_can_ask_question
+  validate :user_needs_to_wait_5_minutes
+
+  before_save :render_body
+  before_create :create_tags
+  after_create :remove_points
 
   COST = 1
 
@@ -30,24 +35,29 @@ class Question < ActiveRecord::Base
     tags.collect(&:name).join(", ")
   end
 
-  before_save :render_body
 
-  before_create :create_tags
-
-  after_create :remove_points
-
-#  scope :with_tag, lambda { |tag_name| includes(:tags).where("tags.name LIKE ?", "#{tag_name}%") }
+  #  scope :with_tag, lambda { |tag_name| includes(:tags).where("tags.name LIKE ?", "#{tag_name}%") }
   def self.with_tag_or_name(search)
     if search.present?
       #joins(:tags).where("tags.name LIKE ? OR title LIKE ?", "#{search}%", "%#{search}%").uniq
       joins("LEFT JOIN 'questions_tags' on questions.id = questions_tags.question_id LEFT JOIN 'tags' on tags.id = questions_tags.tag_id")
-        .where("tags.name LIKE ? or TITLE like ?","%#{search}%","%#{search}%").uniq
+      .where("tags.name LIKE ? or TITLE like ?","%#{search}%","%#{search}%").uniq
     else
       Question.scoped
     end
   end
 
   private
+  def user_needs_to_wait_5_minutes
+    seconds_to_wait = 1.minutes
+    most_recent_question = self.user.questions.order("created_at DESC").first
+    if most_recent_question
+      if (Time.now - most_recent_question.created_at).seconds < seconds_to_wait
+        errors[:body] << "You need to wait #{seconds_to_wait} seconds before you can ask another question"
+      end
+    end
+  end
+
   def user_can_ask_question
     self.errors[:body] << "Not enough points to ask a question" unless self.user.can_ask_question?
   end
