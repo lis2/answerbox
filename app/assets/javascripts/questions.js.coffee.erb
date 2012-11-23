@@ -34,8 +34,8 @@ $ ->
       $nav = $("ul.nav")
       if not $nav.find("#nq_reload").length
         element = """
-        <li>
-          <a href="<%= Rails.application.routes.url_helpers.root_path %>"><p class="text-info">New questions</p></a>
+        <li class='text-info-custom' >
+          <a class='text-info-custom' href="<%=Rails.application.routes.url_helpers.root_path %>">!! New question arrived !!</a>
         </li>
         """
         $nav.append($(element))

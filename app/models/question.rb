@@ -49,7 +49,7 @@ class Question < ActiveRecord::Base
 
   private
   def user_needs_to_wait_5_minutes
-    seconds_to_wait = 1.minutes
+    seconds_to_wait = 1.second;#1.minutes
     most_recent_question = self.user.questions.order("created_at DESC").first
     if most_recent_question
       if (Time.now - most_recent_question.created_at).seconds < seconds_to_wait
