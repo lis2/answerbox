@@ -30,6 +30,7 @@ $ ->
 
   if ($(".container-fluid.index").size() > 0)
     question_subscription = faye.subscribe "/questions", (message) ->
+      console.log message
       $nav = $("ul.nav")
       if not $nav.find("#nq_reload").length
         element = """
@@ -44,10 +45,12 @@ $ ->
     question_id = $dq.attr("data-question")
 
     subscription = faye.subscribe "/questions/#{question_id}", (message) ->
+      console.log message
       $all_answers  = $(".all_answers")
       $all_answers.append($(message.fresh_answer)) if message.fresh_answer?
 
     comment_subscription = faye.subscribe "/questions/#{question_id}/comments",(message) ->
       if not $("*[data-id=#{message.comment_id}]").length
+        console.log message
         $("#answer_list").append(message.rendered_comment)
 

@@ -49,7 +49,7 @@ class Question < ActiveRecord::Base
 
   private
   def user_can_ask_question
-    self.errors[:cannot_ask] << "Not enough points to ask a question" unless self.user.can_ask_question?
+    self.errors[:body] << "Not enough points to ask a question" unless self.user.can_ask_question?
   end
 
   def remove_points
