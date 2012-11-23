@@ -640,7 +640,8 @@ a.text-error:hover {
   color: #3a87ad;
 }
 .text-info-custom {
-  color: #3a87ad !important;
+  color: green !important;
+  font-weight: bold;
   padding-left: 1px;
 }
 
